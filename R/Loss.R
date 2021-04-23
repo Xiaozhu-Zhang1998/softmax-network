@@ -18,8 +18,8 @@ dJ <- function(label, g, n){
     which(label[i] == levels(label))
   })
   eg <- exp(g.aug)
-  rs <- sapply(1:(nrow(g)), function(i){
-    -(class == i) * 1 + (eg[i, ] / apply(eg, 2, sum))
+  rs <- sapply(1:(nrow(g)), function(j){
+    -(class == j) * 1 + (eg[j, ] / apply(eg, 2, sum))
   })
   return(t(rs))
 }

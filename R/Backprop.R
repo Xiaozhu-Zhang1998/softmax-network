@@ -26,7 +26,7 @@ backprop <- function(X, n, p, k, t, w2,
     })
   })
   dJb <- lapply(1:(k-1), function(j){
-    matrix(apply(dJb[[2]], 1, sum), p)
+    matrix(apply(dJb[[j]], 1, sum), p)
   })
   return(list(dJw1 = dJw1, dJw2 = dJw2, dJb = dJb))
 }
