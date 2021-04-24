@@ -1,15 +1,15 @@
 # Forward
-forward <- function(n, k, X, w1, w2, b){
-  diag1 <- lapply(1:(k-1), function(j){
+forward <- function(n, k, X, label, w1, w2, b){
+  diag1 <- lapply(1:k, function(j){
     w1[[j]] %*% t(X)
   })
-  ht <- lapply(1:(k-1), function(j){
+  ht <- lapply(1:k, function(j){
     af(diag1[[j]])
   })
-  diag2 <- lapply(1:(k-1), function(j){
+  diag2 <- lapply(1:k, function(j){
     w2[[j]] %*% ht[[j]]
   })
-  g <- lapply(1:(k-1), function(j){
+  g <- lapply(1:k, function(j){
     af(diag2[[j]]) + t(b[[j]]) %*% t(X)
   })
   
@@ -18,11 +18,11 @@ forward <- function(n, k, X, w1, w2, b){
   g.mat <- do.call(rbind, g)
   dJg <- dJ(label, g.mat, n)
   
-  diag1 <- lapply(1:(k-1), function(j){
+  diag1 <- lapply(1:k, function(j){
     daf(diag1[[j]])
   })
   
-  diag2 <- lapply(1:(k-1), function(j){
+  diag2 <- lapply(1:k, function(j){
     daf(diag2[[j]])
   })
   return(list(diag1 = diag1, diag2 = diag2, 

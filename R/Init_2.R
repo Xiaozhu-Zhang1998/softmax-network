@@ -5,6 +5,10 @@ init <- function(p, k, t){
   })
   
   w2 <- lapply(1:k, function(j){
+    matrix(rnorm(t * t), t, t) / t
+  })
+  
+  w3 <- lapply(1:k, function(j){
     matrix(rnorm(1 * t), 1, t) / t
   })
   
@@ -14,17 +18,20 @@ init <- function(p, k, t){
   
   first_moment_1 <- lapply(1:k, function(j){0})
   first_moment_2 <- lapply(1:k, function(j){0})
+  first_moment_3 <- lapply(1:k, function(j){0})
   first_moment_b <- lapply(1:k, function(j){0})
   second_moment_1 <- lapply(1:k, function(j){0})
   second_moment_2 <- lapply(1:k, function(j){0})
+  second_moment_3 <- lapply(1:k, function(j){0})
   second_moment_b <- lapply(1:k, function(j){0})
   
-  return(list(w1 = w1, w2 = w2, b = b,
+  return(list(w1 = w1, w2 = w2, w3 = w3, b = b,
               first_moment_1 = first_moment_1, 
               first_moment_2 = first_moment_2,
+              first_moment_3 = first_moment_3,
               first_moment_b = first_moment_b,
               second_moment_1 = second_moment_1, 
-              second_moment_2 = second_moment_2, 
+              second_moment_2 = second_moment_2,
+              second_moment_3 = second_moment_3,
               second_moment_b = second_moment_b))
 }
-
