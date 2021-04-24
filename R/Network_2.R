@@ -44,7 +44,7 @@ Network <- function(X, label, lambda, M,
     second_moment_3 <- update$second_moment_3
     second_moment_b <- update$second_moment_b
     
-    Hier-Prox
+    # Hier-Prox
     for(j in 1:k){
       rs <- Hier_Prox(p, t, b[[j]], w1[[j]], lambda, M)
       b[[j]] <- rs$b
