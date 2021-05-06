@@ -56,12 +56,13 @@ gMCP_MCP <- function(p, t, b, w, lambda, M, gamma = 3.7){
     
     # prep sum(s)
     s <- sort(s, decreasing = T)
-    s.sum <- cumsum(s)
+    s <- cumsum(s)
     
     # update b
     for(j in 1:p){ # j indicates each feature
       # find sum(s)
       bound <- dcMCP(beta, j, lambda, gamma)  * dMCP(abs(beta[j]), lambda, gamma) / M
+      s.sum <- s
       s.sum[s.sum >= bound] <- 0
       s.sum <- max(s.sum)
       # update
