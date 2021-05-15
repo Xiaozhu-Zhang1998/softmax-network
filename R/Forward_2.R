@@ -1,7 +1,13 @@
 # Forward
-forward <- function(n, k, X, label, w1, w2, w3, b){
+forward <- function(n, k, X, label, w1, w2, w3, b, drop.p){
   diag1 <- lapply(1:k, function(j){
     w1[[j]] %*% t(X)
+  })
+  # dropout 
+  diag1 <- lapply(1:k, function(j){
+    dg.dim <- dim(diag1[[j]])
+    U <- (matrix(runif(dg.dim[1] * dg.dim[2]), dg.dim[1], dg.dim[2]) < drop.p)
+    return(diag1[[j]] * U)
   })
   h1 <- lapply(1:k, function(j){
     af(diag1[[j]])

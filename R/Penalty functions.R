@@ -21,17 +21,17 @@ cMCP <- function(x, lambda, gamma){
 
 # Derivative of MCP function
 dMCP <- function(x, lambda, gamma){
-  rs <- lambda * max(0, 1 - x / (lambda * gamma))
+  rs <- lambda * max(1e-7, 1 - x / (lambda * gamma))
   return(rs)
 }
 
 # Derivative of composite MCP function
 dcMCP <- function(x, ind, lambda, gamma){
   A <- sapply(1:length(x), function(i){
-    MCP(x[i], lambda, gamma)
+    MCP(abs(x[i]), lambda, gamma)
   })
   A <- sum(A)
   A <- dMCP(A, lambda, gamma)
-  B <- dMCP(x[ind], lambda, gamma)
+  B <- dMCP(abs(x[ind]), lambda, gamma)
   return(A * B)
 }

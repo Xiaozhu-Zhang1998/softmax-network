@@ -1,7 +1,7 @@
 ## A 3-layer NN
 Network <- function(X, label, lambda, M, 
-                    t, alpha0, batchsize,
-                    beta1 = 0.9, beta2 = 0.999, nepoch = 50, decay = 1e-3)
+                    t, alpha0, batchsize, drop.p, nepoch,
+                    beta1 = 0.9, beta2 = 0.999, decay = 1e-3)
 {
   # Structure
   struc <- NetStructure(X, label) # foo
@@ -20,7 +20,7 @@ Network <- function(X, label, lambda, M,
   alpha <- alpha0
   for(epoch in 1:nepoch){
     # Forward
-    current.val <- forward(n, k, X, label, w1, w2, b) # foo
+    current.val <- forward(n, k, X, label, w1, w2, b, drop.p) # foo
     
     # Backward
     grad <- backprop(X, n, p, k, t, w2, current.val$diag1, current.val$diag2,
@@ -37,9 +37,16 @@ Network <- function(X, label, lambda, M,
     second_moment_2 <- update$second_moment_2
     second_moment_b <- update$second_moment_b
     
+    # dropout
+    # w1 <- lapply(1:k, function(j){
+    #   w.dim <- dim(w1[[j]])
+    #   U <- matrix(runif(w.dim[1] * w.dim[2]), w.dim[1]) < drop.p
+    #   return(w1[[j]] * U)
+    # })
+    
     # Hier-Prox
     for(j in 1:k){
-      rs <- Hier_Prox(p, t, b[[j]], w1[[j]], lambda, M)
+      rs <- gMCP_MCP(p, t, b[[j]], w1[[j]], lambda, M)
       b[[j]] <- rs$b
       w1[[j]] <- rs$w
     }

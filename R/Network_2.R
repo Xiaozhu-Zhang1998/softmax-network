@@ -1,7 +1,7 @@
 ## A 3-layer NN
 Network <- function(X, label, lambda, M,
-                    t, alpha0, batchsize,
-                    beta1 = 0.9, beta2 = 0.999, nepoch = 50, decay = 1e-3)
+                    t, alpha0, batchsize, drop.p, nepoch,
+                    beta1 = 0.9, beta2 = 0.999, decay = 1e-3)
 {
   # Structure
   struc <- NetStructure(X, label) # foo
@@ -22,7 +22,7 @@ Network <- function(X, label, lambda, M,
   alpha <- alpha0
   for(epoch in 1:nepoch){
     # Forward
-    current.val <- forward(n, k, X, label, w1, w2, w3, b) # foo
+    current.val <- forward(n, k, X, label, w1, w2, w3, b, drop.p) # foo
     
     # Backward
     grad <- backprop(X, n, p, k, t, w2, w3, 

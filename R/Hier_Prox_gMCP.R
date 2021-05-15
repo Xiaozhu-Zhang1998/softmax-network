@@ -1,9 +1,10 @@
 # Group MCP
 
 gMCP_l1 <- function(p, t, b, w, lambda, M, gamma = 3.7){
-  beta <- b
   v <- b
   u <- w
+  beta <- b
+  count <- 0
   while(TRUE){ 
     s <- matrix(rep(0, p * t), t, p)
     
@@ -18,30 +19,38 @@ gMCP_l1 <- function(p, t, b, w, lambda, M, gamma = 3.7){
     }
     
     # find sum(s)
-    s <- sort(s, decreasing = T)
+    s <- sort(s)
     s.sum <- cumsum(s)
     bound <- dMCP(sum(abs(beta)), lambda, gamma) / M
     s.sum[s.sum >= bound] <- 0
     s.sum <- max(s.sum)
     
     # update b
-    for(j in 1:p){ # j indicates each feature
-      a <- (dMCP(sum(abs(beta)), lambda, gamma) - M * sj.sum) 
-      b[j] <- sign(v[j]) * max(0, abs(v[j]) - a)
-    }
+    a <- dMCP(sum(abs(beta)), lambda, gamma) - M * s.sum
+    print(a)
+    b <- sapply(1:p, function(j){ # j indicates each feature
+      sign(v[j]) * max(0, abs(v[j]) - a)
+    })
     
     # finish this epoch
-    if(abs(beta - b) <= 1e-3) break
+    count <- count + 1
+    if(sum(abs(beta - b)) <= p * 1e-3) break
+    if(count == 50) break
     beta <- b
   }
-  return(list(b = b, w = w))
+  return(list(b = as.matrix(b), w = w))
 }
 
-gMCP_MCP <- function(p, t, b, w, lambda, M, gamma = 3.7){
-  beta <- b
+# ======================================
+
+# b <- b.store[[1]]
+# w <- w1.store[[1]]
+
+gMCP_MCP <- function(p, t, b, w, lambda, M, gamma = 6){
   v <- b
   u <- w
-  while(TRUE){ 
+  beta <- v
+  for(loop in 1:5){ 
     s <- matrix(rep(0, p * t), t, p)
     
     # update w
@@ -53,25 +62,25 @@ gMCP_MCP <- function(p, t, b, w, lambda, M, gamma = 3.7){
         }
       }
     }
-    
-    # prep sum(s)
-    s <- sort(s, decreasing = T)
-    s <- cumsum(s)
-    
+
     # update b
     for(j in 1:p){ # j indicates each feature
       # find sum(s)
-      bound <- dcMCP(beta, j, lambda, gamma)  * dMCP(abs(beta[j]), lambda, gamma) / M
-      s.sum <- s
+      bound <- dcMCP(beta, j, lambda, gamma) / M
+      sj <- s
+      sj[sj > bound] <- 0
+      sj <- sort(sj, decreasing = T)
+      s.sum <- cumsum(sj)
       s.sum[s.sum >= bound] <- 0
       s.sum <- max(s.sum)
       # update
-      a <- (dcMCP(beta, j, lambda, gamma)  * dMCP(abs(beta[j]), lambda, gamma) - M * sj.sum) 
+      a <- dcMCP(beta, j, lambda, gamma) - M * s.sum 
+      #print(a)
       b[j] <- sign(v[j]) * max(0, abs(v[j]) - a)
     }
     
     # finish this epoch
-    if(abs(beta - b) <= 1e-3) break
+    #print(sum(abs(beta - b)))
     beta <- b
   }
   return(list(b = b, w = w))
