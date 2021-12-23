@@ -1,0 +1,11 @@
+"0","# Type your code for Question 5 here
+bandit_posterior(data = data.frame(machine = c(2,2,2,1,1), outcome = c(""W"",""W"",""L"",""W"",""W"")))
+"
+"1","  m1_good "
+"1","  m2_good "
+"1","
+"
+"1","0.5714286 "
+"1","0.4285714 "
+"1","
+"

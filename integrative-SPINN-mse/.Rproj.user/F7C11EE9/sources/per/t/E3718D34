@@ -1,0 +1,26 @@
+{
+    "id": "E3718D34",
+    "path": "C:/Users/Administrator/Desktop/softmax-regnet/integrative-SPINN-mse/Network.R",
+    "project_path": "Network.R",
+    "type": "r_source",
+    "hash": "2032695428",
+    "contents": "",
+    "dirty": false,
+    "created": 1624956376864.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "40,61",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1624961840,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1624961840023,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,26 @@
+{
+    "id": "59460A23",
+    "path": "C:/Users/Administrator/Desktop/softmax-regnet/integrative-SPINN-mse/Forward.R",
+    "project_path": "Forward.R",
+    "type": "r_source",
+    "hash": "1332378428",
+    "contents": "",
+    "dirty": false,
+    "created": 1624956415073.0,
+    "source_on_save": false,
+    "relative_order": 12,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "2,22",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1624956433,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1624956433612,
+    "read_only": false,
+    "read_only_alternatives": []
+}

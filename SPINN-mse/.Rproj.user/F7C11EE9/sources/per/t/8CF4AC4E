@@ -1,0 +1,27 @@
+{
+    "id": "8CF4AC4E",
+    "path": "C:/Users/Administrator/Desktop/softmax-regnet/SPINN-mse/Data_high_dim.R",
+    "project_path": "Data_high_dim.R",
+    "type": "r_source",
+    "hash": "3084883075",
+    "contents": "",
+    "dirty": false,
+    "created": 1628817526043.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "2,19",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1628820299,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1628820299836,
+    "read_only": false,
+    "read_only_alternatives": []
+}
